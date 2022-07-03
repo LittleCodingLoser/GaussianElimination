@@ -1,16 +1,27 @@
 #include <iostream>
 #define FastIO ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
-int num, checkResult;
+int num, checkResult, operation;
 double para[1000][1001], inverse[1000][1000];
 
-void input() {
-    FastIO
+void inputOperation1() {
     cout << "Your n is? (Max is 1000) " << endl;
     cin >> num;
+    cout << "Please input " << num + 1 << " * " << num << " parameters" << endl;
     for(int i = 0; i < num; i++) {
         cout << i + 1 << " row of parameters: " << endl;
         for(int j = 0; j <= num; j++) 
+            cin >> para[i][j];
+    }
+}
+
+void inputOperation2() {
+    cout << "Your n is? (Max is 1000) " << endl;
+    cin >> num;
+    cout << "Please input " << num << " * " << num << " parameters" << endl;
+    for(int i = 0; i < num; i++) {
+        cout << i + 1 << " row of parameters: " << endl;
+        for(int j = 0; j < num; j++) 
             cin >> para[i][j];
     }
 }
@@ -31,7 +42,7 @@ void initInverse() {
 void subtractRow(double n, int a, double m, int b) {
     for(int i = 0; i <= num; i++) {
         para[a][i] = n * para[a][i] - m * para[b][i];
-        if (i < num) inverse[a][i] = n * inverse[a][i] - m * inverse[b][i];
+        if (i < num && operation == 2) inverse[a][i] = n * inverse[a][i] - m * inverse[b][i];
     }
 }
 
@@ -75,7 +86,7 @@ void printAns() {
 
 void printInverse() {
     if (checkResult == 1) {
-        cout << "BTW, here's the inverse matrix of your original matrix" << endl;
+        cout << "Here's the inverse matrix of your original matrix" << endl;
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < num; j++) {
                 cout << inverse[i][j] / para[i][i] << " ";
@@ -88,10 +99,26 @@ void printInverse() {
 }
 
 int main() {
-    input();
-    initInverse();
-    GaussianElimination(0);
-    printAns();
-    printInverse();
+    FastIO
+    cout << "What do you want me to do?\n(1) Solve simultaneous equations?\n(2)Get the inverse matrix of a square matrix?\nPick one(1 or 2)" << endl;
+    cin >> operation;
+    if (operation == 1) {
+
+        inputOperation1();
+        GaussianElimination(0);
+        printAns();
+
+    } else if (operation == 2) {
+
+        inputOperation2();
+        initInverse();
+        GaussianElimination(0);
+        printInverse();
+
+    } else {
+
+        cout << "I told you to pick one between them!";
+
+    }
     return 0;
 }
