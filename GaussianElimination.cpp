@@ -56,14 +56,14 @@ int checkAns(int row) {
     return 1; // 1 means there's an only ans
 }
 
-void GaussianElimination(int row) {
+void GaussianJordanElimination(int row) {
     if(row == num) return;
     for(int i = 0; i < row; i++) {
         subtractRow(para[i][i], row, para[row][i], i);
     }
     checkResult = checkAns(row);
     if(checkResult != 1) return;
-    GaussianElimination(row + 1);
+    GaussianJordanElimination(row + 1);
     for(int i = row + 1; i < num; i++) {
         subtractRow(para[i][i], row, para[row][i], i);
     }
@@ -105,14 +105,14 @@ int main() {
     if (operation == 1) {
 
         inputOperation1();
-        GaussianElimination(0);
+        GaussianJordanElimination(0);
         printAns();
 
     } else if (operation == 2) {
 
         inputOperation2();
         initInverse();
-        GaussianElimination(0);
+        GaussianJordanElimination(0);
         printInverse();
 
     } else {
