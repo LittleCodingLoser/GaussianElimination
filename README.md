@@ -1,5 +1,5 @@
-# GaussianElimination
-An application of Gaussian elimination, implemented in C++. You can either use it to solve complex simultaneous equations or get the inverse matrix of a square matrix
+# GaussianJordanElimination
+An application of Gaussian-Jordan elimination, implemented in C++. You can either use it to solve complex simultaneous equations or get the inverse matrix of a square matrix
 
 ## How to use it?
 Clone this repo, or if you're lazy then you can simply copy the cpp file and paste it into some random online compiler.<br>
